@@ -1,1 +1,1 @@
-# Histopathology slides analysis based on hand-drawed contour
+# Slide WSI analysis based on ROI
