@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import openslide
 from shapely.geometry import Polygon, Point
-from pydaily import format 
+from pydaily import format
 from pycontour import poly_transform, cv2_transform
 from skimage import io
 import cv2
@@ -74,7 +74,7 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4):
 if __name__ == "__main__":
     slides_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Slides"
     annotation_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Annotations"
-    overlay_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Overlay2"
+    overlay_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Overlay"
 
     # gen_contour_overlay(slides_dir, annotation_dir, overlay_dir)
     check_contour_valid(slides_dir, annotation_dir)

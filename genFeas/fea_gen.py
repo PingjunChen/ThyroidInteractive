@@ -15,6 +15,7 @@ from shapely.geometry import Polygon, Point
 Image.MAX_IMAGE_PIXELS = None
 import warnings
 warnings.simplefilter("ignore")
+import time
 
 from pydaily import format
 from pycontour import poly_transform
@@ -85,7 +86,10 @@ def pred_feas(model, patches, args):
     with torch.no_grad():
         for ind, inputs in enumerate(dset_loader):
             x = Variable(inputs.cuda())
+            start_time = time.time()
             prob, logit, fea = extract_deep_feas(model, x, args.model_name)
+            elapsed_time = time.time() - start_time
+            # print("Takes {} for {} images.".format(elapsed_time, len(prob)))
 
             probs.extend(prob.cpu().numpy())
             logits.extend(logit.cpu().numpy())
@@ -108,7 +112,7 @@ def sort_by_prob(BBoxes, ClsProbs, ClsLogits, FeaVecs):
 
 
 def gen_features(roi_dir, fea_dir, mode, ft_model, args):
-    fea_dir = os.path.join(fea_dir, args.data_name, args.model_name, mode)
+    fea_dir = os.path.join(fea_dir, args.model_name, mode)
     data_dir = os.path.join(roi_dir, mode)
     img_list = [ele for ele in os.listdir(data_dir) if "png" in ele]
 

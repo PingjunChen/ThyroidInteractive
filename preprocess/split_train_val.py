@@ -14,11 +14,13 @@ Image.MAX_IMAGE_PIXELS = None
 import warnings
 warnings.simplefilter("ignore")
 
+
 label_map = {
     'Benign': 1,
     'Uncertain': 2,
     'Malignant': 3
 }
+
 
 
 def organize_imgs(imgs_dir, img_list, mode):
@@ -31,6 +33,7 @@ def organize_imgs(imgs_dir, img_list, mode):
         json_path = os.path.join(imgs_dir, img_name+".json")
         shutil.move(img_path, save_dir)
         shutil.move(json_path, save_dir)
+
 
 
 def split_trainval(imgs_dir, ratio=0.2, organize=False):
@@ -84,14 +87,12 @@ def gen_patches(imgs_dir, patch_dir, img_list, dset, patch_size=256):
                     io.imsave(patch_path, patch_img)
 
 
-
-
 if __name__ == "__main__":
-    np.random.seed(1234)
+    np.random.seed(1236)
     imgs_dir = "/media/pingjun/Pingjun350/ThyroidData/AnalysisROI"
-    patch_dir = "/media/pingjun/Pingjun350/ThyroidData/PatchesL2"
+    patch_dir = "/media/pingjun/Pingjun350/ThyroidData/ThyroidS3/PatchesL2"
 
-    train_list, val_list = split_trainval(imgs_dir, ratio=0.2)
+    train_list, val_list = split_trainval(imgs_dir, ratio=0.2, organize=True)
 
-    # gen_patches(imgs_dir, patch_dir, val_list, "val", patch_size=512)
-    # gen_patches(imgs_dir, patch_dir, train_list, "train", patch_size=512)
+    # gen_patches(imgs_dir, patch_dir, val_list, "val", patch_size=256)
+    # gen_patches(imgs_dir, patch_dir, train_list, "train", patch_size=256)
