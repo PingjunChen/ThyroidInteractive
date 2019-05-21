@@ -14,13 +14,13 @@ def set_args():
     parser.add_argument('--seed',            type=int,   default=1234)
     parser.add_argument('--batch_size',      type=int,   default=64)
     parser.add_argument('--patch_size',      type=int,   default=256)
-    parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS1/Models/PatchL2Models")
-    parser.add_argument('--model_name',      type=str,   default="resnet34")
-    parser.add_argument('--model_path',      type=str,   default="Thyroid-ft-0.891.pth")
+    parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS4/Models/PatchL2Models")
+    parser.add_argument('--model_name',      type=str,   default="resnet50")
+    parser.add_argument('--model_path',      type=str,   default="Thyroid-ft-0.871.pth")
 
-    parser.add_argument('--roi_dir',         type=str,   default="../data/ThyroidS1/ImgsROI")
-    parser.add_argument('--data_mode',       type=str,   default="val")
-    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS1/FeasROI/L2Feas")
+    parser.add_argument('--roi_dir',         type=str,   default="../data/ThyroidS4/ImgsROI")
+    parser.add_argument('--data_mode',       type=str,   default="train")
+    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS4/FeasROI/L2Feas")
 
     args = parser.parse_args()
     return args

@@ -8,20 +8,21 @@ import torch.backends.cudnn as cudnn
 from train_eng import validate_model
 from patchloader import val_loader
 
+
 def set_args():
     parser = argparse.ArgumentParser(description='Thyroid Classification')
     parser.add_argument('--seed',            type=int,   default=1234)
     parser.add_argument('--batch_size',      type=int,   default=32)
-    parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS1/Models/PatchL2Models")
-    parser.add_argument('--model_name',      type=str,   default="resnet50")
-    parser.add_argument('--model_path',      type=str,   default="Thyroid-ft-0.903.pth")
+    parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS4/Models/PatchL2Models")
+    parser.add_argument('--model_name',      type=str,   default="resnet34")
+    parser.add_argument('--model_path',      type=str,   default="Thyroid-ft-0.874.pth")
 
     args = parser.parse_args()
     return args
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "5"
     args = set_args()
     torch.cuda.manual_seed(args.seed)
     cudnn.benchmark = True
