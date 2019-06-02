@@ -5,6 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import deepdish as dd
 from sklearn.metrics import roc_curve, auc
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 
 
 def aggregate_feas(fea_arr):
@@ -36,6 +38,15 @@ def load_fea_target(fea_dir):
 
     return fea_arr, target_arr
 
+
+def label2Onehot(labels):
+    label_encoder = LabelEncoder()
+    integer_encoded = label_encoder.fit_transform(labels)
+    onehot_encoder = OneHotEncoder(sparse=False)
+    integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)
+    onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
+
+    return onehot_encoded
 
 
 def draw_multiclass_roc(targets, probs):

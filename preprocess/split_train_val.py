@@ -88,14 +88,15 @@ def gen_patches(imgs_dir, patch_dir, img_list, dset, patch_size=256):
 
 
 if __name__ == "__main__":
-    np.random.seed(1237)
+    np.random.seed(1238)
     imgs_dir = "/media/pingjun/Pingjun350/ThyroidData/AnalysisROI"
-    patch_dir = "/media/pingjun/Pingjun350/ThyroidData/ThyroidS4/PatchesL2"
+    patch_dir = "/media/pingjun/Pingjun350/ThyroidData/ThyroidS5/PatchesL2"
+
+
+    # # generate patches
+    # train_list, val_list = split_trainval(imgs_dir, ratio=0.2)
+    # gen_patches(imgs_dir, patch_dir, val_list, "val", patch_size=256)
+    # gen_patches(imgs_dir, patch_dir, train_list, "train", patch_size=256)
 
     # move slides into train/val
     train_list, val_list = split_trainval(imgs_dir, ratio=0.2, organize=True)
-
-    # generate patches
-    train_list, val_list = split_trainval(imgs_dir, ratio=0.2)
-    gen_patches(imgs_dir, patch_dir, val_list, "val", patch_size=256)
-    gen_patches(imgs_dir, patch_dir, train_list, "train", patch_size=256)
