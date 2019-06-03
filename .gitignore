@@ -6,6 +6,9 @@ data/
 .DS_Store
 .remote-sync.json
 
+
+*.mat
+*.pdf
 *.py[cod]
 *$py.class
 *.log
