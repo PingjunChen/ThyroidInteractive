@@ -20,7 +20,7 @@ def set_args():
     parser.add_argument('--seed',            type=int,   default=1234)
     parser.add_argument('--log_interval',    type=int,   default=100)
     # model directory and name
-    parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS5/Models/PatchL2Models")
+    parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS6/Models/PatchL2Models")
     parser.add_argument('--class_num',       type=int,   default=3)
     parser.add_argument('--data_name',       type=str,   default="Thyroid")
     parser.add_argument('--model_name',      type=str,   default="resnet50")
@@ -31,7 +31,7 @@ def set_args():
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
     args = set_args()
     torch.cuda.manual_seed(args.seed)
     cudnn.benchmark = True
