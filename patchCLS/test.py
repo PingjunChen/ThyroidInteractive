@@ -15,17 +15,16 @@ def set_args():
     parser.add_argument('--batch_size',      type=int,   default=32)
     parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS6/Models/PatchL2Models")
     parser.add_argument('--model_name',      type=str,   default="resnet50")
-    parser.add_argument('--model_path',      type=str,   default="Thyroid-ft-0.874.pth")
+    parser.add_argument('--model_path',      type=str,   default="Thyroid03-0.9213.pth")
+    parser.add_argument('--device_id',       type=str,   default="3")
 
     args = parser.parse_args()
     return args
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
     args = set_args()
-    torch.cuda.manual_seed(args.seed)
-    cudnn.benchmark = True
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.device_id
 
     model_full_path = os.path.join(args.model_dir, args.model_name, args.model_path)
     ft_model = torch.load(model_full_path)
