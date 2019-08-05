@@ -16,6 +16,7 @@ Image.MAX_IMAGE_PIXELS = None
 import warnings
 warnings.simplefilter("ignore")
 import time
+import gist
 
 from pydaily import format
 from pycontour import poly_transform
@@ -111,7 +112,7 @@ def sort_by_prob(BBoxes, ClsProbs, ClsLogits, FeaVecs):
     return fea_dict
 
 
-def gen_features(roi_dir, fea_dir, mode, ft_model, args):
+def gen_deep_features(roi_dir, fea_dir, mode, ft_model, args):
     fea_dir = os.path.join(fea_dir, args.model_name, mode)
     data_dir = os.path.join(roi_dir, mode)
     img_list = [ele for ele in os.listdir(data_dir) if "png" in ele]
@@ -155,6 +156,59 @@ def gen_features(roi_dir, fea_dir, mode, ft_model, args):
 
             ClsProbs, ClsLogits, FeaVecs = pred_feas(ft_model, patch_list, args)
             fea_dict = sort_by_prob(BBoxes, ClsProbs, ClsLogits, FeaVecs)
+
+            # save features
+            cat_fea_dir = os.path.join(fea_dir, region_label)
+            if not os.path.exists(cat_fea_dir):
+                os.makedirs(cat_fea_dir)
+            dd.io.save(os.path.join(cat_fea_dir, region_name+".h5"), fea_dict)
+
+
+def gen_gist_features(roi_dir, fea_dir, mode, args):
+    fea_dir = os.path.join(fea_dir, args.model_name, mode)
+    data_dir = os.path.join(roi_dir, mode)
+    img_list = [ele for ele in os.listdir(data_dir) if "png" in ele]
+
+    for ind, ele in enumerate(img_list):
+        if ind > 0 and ind % 10 == 0:
+            print("processing {}/{}".format(ind, len(img_list)))
+
+        cur_img_path = os.path.join(data_dir, ele)
+        img_name = os.path.splitext(ele)[0]
+        cur_anno_path = os.path.join(data_dir, img_name+".json")
+
+        if not (os.path.exists(cur_img_path) and os.path.exists(cur_anno_path)):
+            print("File not available")
+
+        img = io.imread(cur_img_path)
+        anno_dict = format.json_to_dict(cur_anno_path)
+        for cur_r in anno_dict:
+            cur_anno = anno_dict[cur_r]
+            region_label = str(label_map[cur_anno['label']])
+            region_name = "_".join([img_name, 'r'+cur_r])
+            x_coors, y_coors = cur_anno['w'], cur_anno['h']
+            cnt_arr = np.zeros((2, len(x_coors)), np.int32)
+            cnt_arr[0], cnt_arr[1] = y_coors, x_coors
+            poly_cnt = poly_transform.np_arr_to_poly(cnt_arr)
+
+            start_x, start_y = min(x_coors), min(y_coors)
+            cnt_w = max(x_coors) - start_x + 1
+            cnt_h = max(y_coors) - start_y + 1
+            coors_arr = patch.wsi_coor_splitting(cnt_h, cnt_w, args.patch_size, overlap_flag=True)
+
+            Feas, BBoxes = [], []
+            for cur_h, cur_w in coors_arr:
+                patch_start_w, patch_start_h = cur_w+start_x, cur_h + start_y
+                patch_center = Point(patch_start_w+args.patch_size/2, patch_start_h+args.patch_size/2)
+                if patch_center.within(poly_cnt) == True:
+                    patch_img = img[patch_start_h:patch_start_h+args.patch_size, patch_start_w:patch_start_w+args.patch_size, :]
+                    patch_desp = gist.extract(patch_img)
+                    Feas.append(patch_desp)
+                    BBoxes.append([patch_start_h, patch_start_w, args.patch_size, args.patch_size])
+            fea_dict = {
+                'feat': np.asarray(Feas),
+                'bbox': np.asarray(BBoxes)
+            }
 
             # save features
             cat_fea_dir = os.path.join(fea_dir, region_label)
