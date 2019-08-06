@@ -10,10 +10,10 @@ from utils import load_fea_target, label2Onehot
 
 
 def set_args():
-    parser = argparse.ArgumentParser(description='Thyroid Classification')
+    parser = argparse.ArgumentParser(description='Generate ROI Classification')
 
     parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS5/FeasROI/L2Feas")
-    parser.add_argument('--model_name',      type=str,   default="resnet50")
+    parser.add_argument('--model_name',      type=str,   default="vgg16bn")
 
     args = parser.parse_args()
     return args

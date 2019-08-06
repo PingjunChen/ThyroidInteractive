@@ -6,16 +6,17 @@ import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, roc_curve
 
 from utils import load_fea_target, draw_multiclass_roc
 
 
 def set_args():
-    parser = argparse.ArgumentParser(description='Thyroid Classification')
+    parser = argparse.ArgumentParser(description='Thyroid ROI Classification')
     parser.add_argument('--seed',            type=int,   default=1234)
 
-    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS4/FeasROI/L2Feas")
+    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS6/FeasROI/L2Feas")
     parser.add_argument('--model_name',      type=str,   default="resnet50")
 
     args = parser.parse_args()
@@ -56,6 +57,15 @@ if __name__ == "__main__":
     print("Confusion matrix:")
     print(rf_cm)
     print("Accuracy is: {:.3f}".format(rf_acc))
+
+    mlp_model = MLPClassifier().fit(train_fea, train_target)
+    mlp_preds = mlp_model.predict(val_fea)
+    mlp_cm = confusion_matrix(val_target, mlp_preds)
+    mlp_acc = accuracy_score(val_target, mlp_preds)
+    print("----MLP Classifier")
+    print("Confusion matrix:")
+    print(mlp_cm)
+    print("Accuracy is: {:.3f}".format(mlp_acc))
 
     # rf_pred_proba = rf_model.predict_proba(val_fea)
     # draw_multiclass_roc(val_target, rf_pred_proba)
