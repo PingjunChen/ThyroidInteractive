@@ -43,8 +43,8 @@ def train_patch_model(args):
     criterion =nn.CrossEntropyLoss()
 
     # dataloader
-    train_data_loader = train_loader(args.batch_size)
-    val_data_loader = val_loader(args.batch_size)
+    train_data_loader = train_loader(args.data_dir, args.batch_size)
+    val_data_loader = val_loader(args.data_dir, args.batch_size)
 
     # folder for model saving
     save_model_dir = os.path.join(args.model_dir, args.model_name, args.session)
