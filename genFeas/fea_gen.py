@@ -41,7 +41,7 @@ class PatchDataset(data.Dataset):
         self.rgb_mean = (0.800, 0.600, 0.800)
         self.rgb_std = (0.125, 0.172, 0.100)
         self.transform = transforms.Compose([transforms.ToPILImage(),
-            transforms.Resize(224), transforms.ToTensor(),
+            transforms.Resize((224, 224)), transforms.ToTensor(),
             transforms.Normalize(mean=self.rgb_mean, std=self.rgb_std)])
 
     def __len__(self):
@@ -71,6 +71,13 @@ def extract_deep_feas(model, x, model_name):
         x = model.avgpool(x)
         fea = x.reshape(x.size(0), -1)
         logit = model.fc(fea)
+        prob = F.softmax(logit, dim=-1)
+    elif "vgg" in model_name:
+        x = model.features(x)
+        x = model.avgpool(x)
+        x = torch.flatten(x, 1)
+        fea = model.classifier[:4](x)
+        logit = model.classifier[4:](fea)
         prob = F.softmax(logit, dim=-1)
     else:
         raise AssertionError("Unknown model name {}".format(model_name))
