@@ -23,18 +23,17 @@ def adjust_learning_rate(optimizer, epoch, args):
 
 def train_patch_model(args):
     # construct model
-    if args.model_name == "resnet34":
-        model = models.resnet34(pretrained=True)
-        model.fc = nn.Linear(512*1, args.class_num)
-    elif args.model_name == "resnet50":
+    if args.model_name == "resnet50":
         model = models.resnet50(pretrained=True)
         model.fc = nn.Linear(512*4, args.class_num)
     elif args.model_name == "vgg16bn":
         model = models.vgg16_bn(pretrained=True)
         model.classifier[-1] = nn.Linear(4096, args.class_num)
+    elif args.model_name == "inceptionv3":
+        model = models.inception_v3(pretrained=True)
+        model.fc = nn.Linear(2048, args.class_num)
     else:
         raise AssertionError("unknown model name")
-
 
     model.cuda()
     # optimizer & loss
@@ -79,7 +78,10 @@ def train_model(train_loader, model, criterion, optimizer, epoch, args):
         inputs, targets = inputs.cuda(), targets.cuda()
         inputs, targets = Variable(inputs), Variable(targets)
         optimizer.zero_grad()
-        outputs = model(inputs)
+        if args.model_name == "inceptionv3":
+            outputs, _ = model(inputs)
+        else:
+            outputs = model(inputs)
 
         loss = criterion(outputs, targets)
         loss.backward()

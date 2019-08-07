@@ -56,7 +56,7 @@ def train_loader(data_dir, batch_size):
             transforms.ColorJitter(brightness=0.12, contrast=0.12, saturation=0.12),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
-            transforms.Resize((224, 224)),
+            transforms.Resize((299, 299)),
             transforms.ToTensor(),
             transforms.Normalize(rgb_mean, rgb_std)])
         )
@@ -72,7 +72,7 @@ def val_loader(data_dir, batch_size):
 
     val_dataset = datasets.ImageFolder(os.path.join(data_dir, "val"),
         transform = transforms.Compose([
-            transforms.Resize((224, 224)),
+            transforms.Resize((299, 299)),
             transforms.ToTensor(),
             transforms.Normalize(rgb_mean, rgb_std)])
         )

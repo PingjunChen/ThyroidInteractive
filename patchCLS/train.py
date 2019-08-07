@@ -24,9 +24,9 @@ def set_args():
     parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS2/Models/PatchL2Models")
     parser.add_argument('--class_num',       type=int,   default=3)
     parser.add_argument('--data_name',       type=str,   default="Thyroid")
-    parser.add_argument('--model_name',      type=str,   default="vgg16bn")
+    parser.add_argument('--model_name',      type=str,   default="inceptionv3")
     parser.add_argument('--device_id',       type=str,   default="7")
-    parser.add_argument('--session',         type=str,   default="01")
+    parser.add_argument('--session',         type=str,   default="00")
 
     args = parser.parse_args()
     return args
