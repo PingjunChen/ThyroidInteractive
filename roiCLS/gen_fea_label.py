@@ -12,8 +12,8 @@ from utils import load_fea_target, label2Onehot
 def set_args():
     parser = argparse.ArgumentParser(description='Generate ROI Classification')
 
-    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS5/FeasROI/L2Feas")
-    parser.add_argument('--model_name',      type=str,   default="vgg16bn")
+    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS6/FeasROI/L2Feas")
+    parser.add_argument('--model_name',      type=str,   default="inceptionv3")
 
     args = parser.parse_args()
     return args
