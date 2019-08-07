@@ -10,16 +10,14 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, roc_curve
-
 from utils import load_fea_target, draw_multiclass_roc
 
 
 def set_args():
     parser = argparse.ArgumentParser(description='Thyroid ROI Classification')
+    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS2/FeasROI/L2Feas")
+    parser.add_argument('--model_name',      type=str,   default="resnet50")
     parser.add_argument('--seed',            type=int,   default=1234)
-
-    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS1/FeasROI/L2Feas")
-    parser.add_argument('--model_name',      type=str,   default="gist")
 
     args = parser.parse_args()
     return args
@@ -69,5 +67,5 @@ if __name__ == "__main__":
     print(mlp_cm)
     print("Accuracy is: {:.3f}".format(mlp_acc))
 
-    # rf_pred_proba = rf_model.predict_proba(val_fea)
-    # draw_multiclass_roc(val_target, rf_pred_proba)
+    rf_pred_proba = rf_model.predict_proba(val_fea)
+    draw_multiclass_roc(val_target, rf_pred_proba)
