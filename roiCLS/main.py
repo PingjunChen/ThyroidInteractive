@@ -2,6 +2,8 @@
 
 import os, sys
 import argparse
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
@@ -16,8 +18,8 @@ def set_args():
     parser = argparse.ArgumentParser(description='Thyroid ROI Classification')
     parser.add_argument('--seed',            type=int,   default=1234)
 
-    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS6/FeasROI/L2Feas")
-    parser.add_argument('--model_name',      type=str,   default="resnet50")
+    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS1/FeasROI/L2Feas")
+    parser.add_argument('--model_name',      type=str,   default="gist")
 
     args = parser.parse_args()
     return args
