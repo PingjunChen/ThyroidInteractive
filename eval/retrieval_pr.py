@@ -30,7 +30,7 @@ def draw_retrieval(all_ret):
     colors = ('r', 'b', 'g', 'k', 'm')
 
     # ax1.set_title('Precision-Recall')
-    ax1.set_xlabel('Recall')
+    ax1.set_xlabel('Recall @ 8 bits')
     ax1.set_ylabel('Precision')
     ax1.set_xlim(0.0, 1.0)
     ax1.set_ylim(0.0, 1.05)
@@ -40,7 +40,7 @@ def draw_retrieval(all_ret):
     ax1.legend(loc='lower left')
 
     ax2.set_xlabel('The number of retrieved samples')
-    ax2.set_ylabel('Recall')
+    ax2.set_ylabel('Recall @ 8 bits')
     ax2.set_xlim(0, 500)
     ax2.set_ylim(0.0, 1.05)
     for index, key in enumerate(all_ret):
@@ -48,7 +48,7 @@ def draw_retrieval(all_ret):
     ax2.legend(loc='lower right')
 
     ax3.set_xlabel('The number of retrieved samples')
-    ax3.set_ylabel('Precision')
+    ax3.set_ylabel('Precision @ 8 bits')
     ax3.set_xlim(0, 500)
     ax3.set_ylim(0.0, 1.05)
     for index, key in enumerate(all_ret):

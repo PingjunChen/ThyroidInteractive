@@ -27,7 +27,7 @@ def draw_retrieval(all_ret):
     colors = ('r', 'b', 'g', 'k', 'm')
 
     ax.set_xlabel('The number of retrieved samples')
-    ax.set_ylabel('mAP')
+    ax.set_ylabel('Precision')
     ax.set_xlim(0, 500)
     ax.set_ylim(0.8, 1.05)
     for index, key in enumerate(all_ret):
