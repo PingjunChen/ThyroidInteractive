@@ -16,10 +16,10 @@ def set_args():
     parser.add_argument('--model_dir',       type=str,   default="../data/ThyroidS2/Models/PatchL2Models")
     parser.add_argument('--roi_dir',         type=str,   default="../data/ThyroidS2/ImgsROI")
     parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS2/FeasROI/L2Feas")
-    parser.add_argument('--model_name',      type=str,   default="vgg16bn")
-    parser.add_argument('--model_path',      type=str,   default="Thyroid01-0.8986.pth")
+    parser.add_argument('--model_name',      type=str,   default="inceptionv3")
+    parser.add_argument('--model_path',      type=str,   default="Thyroid02-0.8847.pth")
     parser.add_argument('--data_mode',       type=str,   default="train")
-    parser.add_argument('--device_id',       type=str,   default="7")
+    parser.add_argument('--device_id',       type=str,   default="6")
 
     args = parser.parse_args()
     return args
