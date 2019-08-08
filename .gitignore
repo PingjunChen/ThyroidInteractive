@@ -1,6 +1,7 @@
 # Folders
 .vscode/
 data/
+retrieval/roiFeas/
 
 # Files
 .DS_Store
