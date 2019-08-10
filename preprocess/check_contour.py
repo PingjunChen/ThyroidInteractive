@@ -57,8 +57,6 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4):
 
         for cur_r in region_annos:
             r_desp = region_annos[cur_r]['desp']
-            if r_desp != "Malignant":
-                continue
             cur_cnt = region_annos[cur_r]['cnts']
             num_ps = len(cur_cnt['h'])
             cnt_arr = np.zeros((2, num_ps), np.float32)
@@ -66,8 +64,8 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4):
             cnt_arr[1] = cur_cnt['w'] / np.power(2, img_level)
             cv_cnt = cv2_transform.np_arr_to_cv_cnt(cnt_arr).astype(np.int32)
             cv2.drawContours(wsi_img, [cv_cnt], 0, (0, 255, 0), 3)
-            # tl_pos = (int(np.mean(cnt_arr[1])), int(np.mean(cnt_arr[0])))
-            # cv2.putText(wsi_img, r_desp, tl_pos, cv2.FONT_HERSHEY_SIMPLEX, 3, (0,255,0), 3, cv2.LINE_AA)
+            tl_pos = (int(np.mean(cnt_arr[1])), int(np.mean(cnt_arr[0])))
+            cv2.putText(wsi_img, r_desp, tl_pos, cv2.FONT_HERSHEY_SIMPLEX, 3, (0,255,0), 3, cv2.LINE_AA)
         overlay_path = os.path.join(overlap_dir, os.path.splitext(ele)[0] + ".png")
         io.imsave(overlay_path, wsi_img)
 
@@ -76,7 +74,7 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4):
 if __name__ == "__main__":
     slides_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Slides"
     annotation_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Annotations"
-    overlay_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/OverlayMaligant"
+    overlay_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Overlay"
 
     gen_contour_overlay(slides_dir, annotation_dir, overlay_dir)
     # check_contour_valid(slides_dir, annotation_dir)
