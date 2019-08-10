@@ -12,9 +12,9 @@ if __name__ == "__main__":
     sample_arr = np.arange(50, 501, 50)
     fea_list = ['gist', 'vgg16bn', 'inceptionv3', 'resnet50']
     ksh_str, cosdish_str, sdh_str = "02", "06", "10"
-    cur_hash_str = ksh_str
+    cur_hash_str = sdh_str
     bit_index, bit_str = 0, "8 bits"
-    save_pdf_str = "ksh_retrieval_map_8bits.pdf"
+    save_pdf_str = "sdh_retrieval_map_8bits.pdf"
 
     splits = [ele for ele in os.listdir(roiFeaRetRoot) if os.path.isdir(os.path.join(roiFeaRetRoot, ele))]
     for ele in fea_list:
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     colors = ('r', 'b', 'g', 'k', 'm')
 
     ax.set_xlabel('The number of retrieved samples')
-    ax.set_ylabel('Precision @ ' + bit_str)
+    ax.set_ylabel('Mean Average Precision @ ' + bit_str)
     ax.set_xlim(0, 500)
     ax.set_ylim(0.60, 1.00)
     for index, key in enumerate(all_ret):
