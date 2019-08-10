@@ -2,8 +2,6 @@
 
 import os, sys
 import argparse
-# import warnings
-# warnings.filterwarnings("ignore", category=FutureWarning)
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import NullFormatter
@@ -56,6 +54,4 @@ if __name__ == "__main__":
         ax.yaxis.set_major_formatter(NullFormatter())
         ax.set_title(method)
         ax.axis('tight')
-
-    # plt.title('WSI ROI feature embedding using TSNE')
     plt.show()
