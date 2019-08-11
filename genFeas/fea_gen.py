@@ -221,7 +221,8 @@ def gen_deep_features(roi_dir, fea_dir, mode, ft_model, args):
             if not os.path.exists(cat_fea_dir):
                 os.makedirs(cat_fea_dir)
             dd.io.save(os.path.join(cat_fea_dir, region_name+".h5"), fea_dict)
-
+            anno_img = img[start_y:start_y+cnt_h, start_x:start_x+cnt_w]
+            # io.imsave(os.path.join(cat_fea_dir, region_name+".png"), anno_img)
 
 def gen_gist_features(roi_dir, fea_dir, mode, args):
     fea_dir = os.path.join(fea_dir, args.model_name, mode)
