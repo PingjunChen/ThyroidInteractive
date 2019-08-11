@@ -33,6 +33,8 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4, sa
 
         for cur_r in region_annos:
             r_desp = region_annos[cur_r]['desp']
+            if r_desp != "Malignant":
+                continue
             cur_cnt = region_annos[cur_r]['cnts']
             num_ps = len(cur_cnt['h'])
             cnt_arr = np.zeros((2, num_ps), np.float32)
@@ -54,6 +56,6 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4, sa
 if __name__ == "__main__":
     slides_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Slides"
     annotation_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Annotations"
-    overlay_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/OverlayAll"
+    overlay_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/OverlayMalignant"
 
     gen_contour_overlay(slides_dir, annotation_dir, overlay_dir)
