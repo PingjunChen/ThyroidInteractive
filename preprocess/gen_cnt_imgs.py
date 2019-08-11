@@ -12,7 +12,7 @@ import cv2
 
 
 
-def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4):
+def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4, save_roi=False, save_wsi=True):
     slide_list = [ele for ele in os.listdir(slides_dir) if "tiff" in ele]
     json_list = [ele for ele in os.listdir(annotation_dir) if "json" in ele]
     if len(slide_list) != len(json_list):
@@ -40,16 +40,20 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4):
             cnt_arr[1] = cur_cnt['w'] / np.power(2, img_level)
             cv_cnt = cv2_transform.np_arr_to_cv_cnt(cnt_arr).astype(np.int32)
             cv2.drawContours(wsi_img, [cv_cnt], 0, (0, 255, 0), 3)
-            overlay_roi_path = os.path.join(overlap_dir, os.path.splitext(ele)[0] + "_r" + cur_r + ".png")
-            start_h, end_h = int(min(cnt_arr[0])), int(max(cnt_arr[0]))
-            start_w, end_w = int(min(cnt_arr[1])), int(max(cnt_arr[1]))
-            io.imsave(overlay_roi_path, wsi_img[start_h:end_h, start_w:end_w])
+            if save_roi == True:
+                overlay_roi_path = os.path.join(overlap_dir, os.path.splitext(ele)[0] + "_r" + cur_r + ".png")
+                start_h, end_h = int(min(cnt_arr[0])), int(max(cnt_arr[0]))
+                start_w, end_w = int(min(cnt_arr[1])), int(max(cnt_arr[1]))
+                io.imsave(overlay_roi_path, wsi_img[start_h:end_h, start_w:end_w])
 
+        if save_wsi == True:
+            overlay_path = os.path.join(overlap_dir, os.path.splitext(ele)[0] + ".png")
+            io.imsave(overlay_path, wsi_img)
 
 
 if __name__ == "__main__":
     slides_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Slides"
     annotation_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Annotations"
-    overlay_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Overlay"
+    overlay_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/OverlayAll"
 
     gen_contour_overlay(slides_dir, annotation_dir, overlay_dir)
