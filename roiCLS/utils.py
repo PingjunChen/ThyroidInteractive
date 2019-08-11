@@ -18,9 +18,11 @@ def aggregate_feas(fea_arr):
 
 def load_fea_target(fea_dir):
     fea_list, target_list = [], []
+    fea_name_list = []
     cat_list = os.listdir(fea_dir)
     for cat in cat_list:
         sub_fea_list, sub_target_list = [], []
+        sub_fea_name_list = []
         cur_cat_dir = os.path.join(fea_dir, cat)
         slide_list = [ele for ele in os.listdir(cur_cat_dir) if "h5" in ele]
         for cur_slide in slide_list:
@@ -30,13 +32,15 @@ def load_fea_target(fea_dir):
             fuse_fea_arr = aggregate_feas(fea_arr)
             sub_fea_list.append(fuse_fea_arr)
             sub_target_list.append(int(cat))
+            sub_fea_name_list.append(os.path.splitext(cur_slide)[0])
         fea_list.extend(sub_fea_list)
         target_list.extend(sub_target_list)
+        fea_name_list.extend(sub_fea_name_list)
 
     fea_arr = np.asarray(fea_list)
     target_arr = np.asarray(target_list)
 
-    return fea_arr, target_arr
+    return fea_arr, target_arr, fea_name_list
 
 
 def label2Onehot(labels):

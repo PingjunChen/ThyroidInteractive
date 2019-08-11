@@ -15,7 +15,7 @@ from utils import load_fea_target, draw_multiclass_roc
 
 def set_args():
     parser = argparse.ArgumentParser(description='Thyroid ROI Classification')
-    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS2/FeasROI/L2Feas")
+    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS5/FeasROI/L2Feas")
     parser.add_argument('--model_name',      type=str,   default="resnet50")
     parser.add_argument('--seed',            type=int,   default=1234)
 
@@ -28,8 +28,10 @@ if __name__ == "__main__":
     np.random.seed(args.seed)
 
     fea_dir = os.path.join(args.fea_dir, args.model_name)
-    train_fea, train_target = load_fea_target(os.path.join(fea_dir, 'train'))
-    val_fea, val_target = load_fea_target(os.path.join(fea_dir, 'val'))
+    train_fea, train_target, train_list  = load_fea_target(os.path.join(fea_dir, 'train'))
+    val_fea, val_target, val_list = load_fea_target(os.path.join(fea_dir, 'val'))
+    print("Length of training rois: {}".format(len(train_target)))
+    print("Length of testing rois: {}".format(len(val_target)))
 
     dtree_model = DecisionTreeClassifier(max_depth=2).fit(train_fea, train_target)
     dtree_preds = dtree_model.predict(val_fea)
