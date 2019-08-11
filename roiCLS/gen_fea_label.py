@@ -14,7 +14,7 @@ def set_args():
     parser = argparse.ArgumentParser(description='Generate ROI Classification')
 
     parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS1/FeasROI/L2Feas")
-    parser.add_argument('--model_name',      type=str,   default="inceptionv3-bk")
+    parser.add_argument('--model_name',      type=str,   default="inceptionv3")
     parser.add_argument('--seed',            type=int,   default=1234)
 
     args = parser.parse_args()
