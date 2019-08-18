@@ -9,10 +9,12 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 
 
-def aggregate_feas(fea_arr):
+def aggregate_feas(fea_arr, p=1):
     # maxpooling
-    fuse_fea = np.mean(fea_arr, axis=0)
 
+    power_feas = np.power(fea_arr, p)
+    mean_power_fea = np.mean(fea_arr, axis=0)
+    fuse_fea = np.power(mean_power_fea, 1.0/p)
     return fuse_fea
 
 
