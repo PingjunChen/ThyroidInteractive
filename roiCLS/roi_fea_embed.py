@@ -24,13 +24,14 @@ def set_args():
 if __name__ == "__main__":
     args = set_args()
     np.random.seed(args.seed)
+    save_pdf_str = "tsne_feature_embedding.pdf"
     fea_methods = ["vgg16bn", "inceptionv3", "resnet50", "gist"]
     (fig, subplots) = plt.subplots(1, len(fea_methods), figsize=(20, 5))
     for ind, method in enumerate(fea_methods):
         # load deep features
         fea_dir = os.path.join(args.fea_dir, method)
-        train_fea, train_target = load_fea_target(os.path.join(fea_dir, 'train'))
-        val_fea, val_target = load_fea_target(os.path.join(fea_dir, 'val'))
+        train_fea, train_target, _ = load_fea_target(os.path.join(fea_dir, 'train'))
+        val_fea, val_target, _ = load_fea_target(os.path.join(fea_dir, 'val'))
         all_feas = np.concatenate((train_fea, val_fea), axis=0)
         all_targets = np.concatenate((train_target, val_target), axis=0)
 
@@ -53,5 +54,7 @@ if __name__ == "__main__":
         ax.xaxis.set_major_formatter(NullFormatter())
         ax.yaxis.set_major_formatter(NullFormatter())
         ax.set_title(method)
-        ax.axis('tight')
-    plt.show()
+        # ax.axis('tight')
+    plt.tight_layout()
+    # plt.show()
+    fig.savefig(save_pdf_str)
