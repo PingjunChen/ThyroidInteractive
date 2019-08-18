@@ -12,11 +12,11 @@ if __name__ == "__main__":
     sample_arr = np.arange(50, 501, 50)
     fea_list = ['gist', 'vgg16bn', 'inceptionv3', 'resnet50']
     ksh_str, cosdish_str, sdh_str = "02", "06", "10"
-    cur_hash_str = sdh_str
+    cur_hash_str = cosdish_str
     bit_index, bit_str = 0, "8 bits"
     save_pdf_str = "sdh_retrieval_map_8bits.pdf"
 
-    splits = [ele for ele in os.listdir(roiFeaRetRoot) if os.path.isdir(os.path.join(roiFeaRetRoot, ele))]
+    splits = ["S1", "S2", "S3", "S4", "S5"]
     for ele in fea_list:
         ret_dict = {}
         ttl_split_map = np.zeros((3, 10), dtype=np.float32)
