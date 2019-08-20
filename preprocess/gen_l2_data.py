@@ -67,9 +67,9 @@ def gen_l2_data(slides_dir, annotation_dir, level_dir, level=2, size=256):
             print("---{} have no proper regions---".format(slide_name))
 
 if __name__ == "__main__":
-    slides_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Slides"
-    annotation_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Annotations"
-    level_dir = "/media/pingjun/Pingjun350/ThyroidData/AnalysisROI"
+    slides_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Slides"
+    annotation_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Annotations"
+    level_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/AnalysisROI"
 
     # gen_contour_overlay(slides_dir, annotation_dir, overlay_dir)
     gen_l2_data(slides_dir, annotation_dir, level_dir)

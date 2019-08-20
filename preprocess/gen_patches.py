@@ -50,8 +50,8 @@ def gen_slide_patches(slide_dir, slide_name, patch_dir, patch_size=256):
 
 
 if __name__ == "__main__":
-    slide_dir = "/media/pingjun/Pingjun350/ThyroidData/AnalysisROI"
+    slide_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/AnalysisROI"
     slide_name = "1054084-2"
-    patch_dir = "/media/pingjun/Pingjun350/ThyroidData/Patches/test"
+    patch_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Patches/test"
 
     gen_slide_patches(slide_dir, slide_name, patch_dir)

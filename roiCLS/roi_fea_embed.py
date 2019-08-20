@@ -14,7 +14,6 @@ from utils import load_fea_target
 def set_args():
     parser = argparse.ArgumentParser(description='Thyroid ROI Classification')
     parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS1/FeasROI/L2Feas")
-    # parser.add_argument('--model_name',      type=str,   default="resnet50")
     parser.add_argument('--seed',            type=int,   default=1234)
 
     args = parser.parse_args()

@@ -72,9 +72,9 @@ def gen_contour_overlay(slides_dir, annotation_dir, overlap_dir, img_level=4):
 
 
 if __name__ == "__main__":
-    slides_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Slides"
-    annotation_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Annotations"
-    overlay_dir = "/media/pingjun/Pingjun350/ThyroidData/Training/Overlay"
+    slides_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Slides"
+    annotation_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Annotations"
+    overlay_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/Training/Overlay"
 
     gen_contour_overlay(slides_dir, annotation_dir, overlay_dir)
     # check_contour_valid(slides_dir, annotation_dir)

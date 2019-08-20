@@ -10,6 +10,7 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, roc_curve
+from sklearn.metrics import precision_score, recall_score
 from utils import load_fea_target, draw_multiclass_roc
 
 
@@ -21,7 +22,6 @@ def set_args():
 
     args = parser.parse_args()
     return args
-
 
 if __name__ == "__main__":
     args = set_args()
@@ -38,36 +38,46 @@ if __name__ == "__main__":
     dtree_cm = confusion_matrix(val_target, dtree_preds)
     dtree_acc = accuracy_score(val_target, dtree_preds)
     print("----Decision Tree")
-    print("Confusion matrix:")
-    print(dtree_cm)
+    # print("Confusion matrix:")
+    # print(dtree_cm)
     print("Accuracy is: {:.3f}".format(dtree_acc))
+    print("Precision score: ", precision_score(val_target, dtree_preds, average=None))
+    print("Recall score: ", recall_score(val_target, dtree_preds, average=None))
 
-    svc_model = SVC(kernel='rbf').fit(train_fea, train_target)
+    svc_model = SVC(kernel='rbf',random_state=1234).fit(train_fea, train_target)
     svc_preds = svc_model.predict(val_fea)
     svc_cm = confusion_matrix(val_target, svc_preds)
     svc_acc = accuracy_score(val_target, svc_preds)
     print("----SVM with Gaussian Kernel")
-    print("Confusion matrix:")
-    print(svc_cm)
+    # print("Confusion matrix:")
+    # print(svc_cm)
     print("Accuracy is: {:.3f}".format(svc_acc))
+    print("Precision score: ", precision_score(val_target, svc_preds, average=None))
+    print("Recall score: ", recall_score(val_target, svc_preds, average=None))
 
     rf_model = RandomForestClassifier(random_state=0).fit(train_fea, train_target)
     rf_preds = rf_model.predict(val_fea)
     rf_cm = confusion_matrix(val_target, rf_preds)
     rf_acc = accuracy_score(val_target, rf_preds)
     print("----Random Forest")
-    print("Confusion matrix:")
-    print(rf_cm)
+    # print("Confusion matrix:")
+    # print(rf_cm)
     print("Accuracy is: {:.3f}".format(rf_acc))
+    print("Precision score: ", precision_score(val_target, rf_preds, average=None))
+    print("Recall score: ", recall_score(val_target, rf_preds, average=None))
 
     mlp_model = MLPClassifier().fit(train_fea, train_target)
     mlp_preds = mlp_model.predict(val_fea)
     mlp_cm = confusion_matrix(val_target, mlp_preds)
     mlp_acc = accuracy_score(val_target, mlp_preds)
     print("----MLP Classifier")
-    print("Confusion matrix:")
-    print(mlp_cm)
+    # print("Confusion matrix:")
+    # print(mlp_cm)
     print("Accuracy is: {:.3f}".format(mlp_acc))
+    print("Precision score: ", precision_score(val_target, mlp_preds, average=None))
+    print("Recall score: ", recall_score(val_target, mlp_preds, average=None))
 
-    rf_pred_proba = rf_model.predict_proba(val_fea)
-    draw_multiclass_roc(val_target, rf_pred_proba)
+
+
+    # # rf_pred_proba = rf_model.predict_proba(val_fea)
+    # # draw_multiclass_roc(val_target, rf_pred_proba)

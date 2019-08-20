@@ -12,7 +12,6 @@ if __name__ == "__main__":
     RetIndData = hdf5storage.loadmat(RetMatPath)
     RetResults = RetIndData['TIdx02']
 
-    import pdb; pdb.set_trace()
 
     # # Consturct train and test label dictionary
     # train_label_dict = {}

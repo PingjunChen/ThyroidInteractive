@@ -12,9 +12,9 @@ def set_args():
     parser.add_argument('--patch_size',      type=int,   default=256)
     parser.add_argument('--model_name',      type=str,   default="gist")
 
-    parser.add_argument('--roi_dir',         type=str,   default="../data/ThyroidS5/ImgsROI")
+    parser.add_argument('--roi_dir',         type=str,   default="../data/ThyroidS1/ImgsROI")
     parser.add_argument('--data_mode',       type=str,   default="val")
-    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS5/FeasROI/L2Feas")
+    parser.add_argument('--fea_dir',         type=str,   default="../data/ThyroidS1/FeasROI/L2Feas")
 
     args = parser.parse_args()
     return args

@@ -89,8 +89,8 @@ def gen_patches(imgs_dir, patch_dir, img_list, dset, patch_size=256):
 
 if __name__ == "__main__":
     np.random.seed(1239)
-    imgs_dir = "/media/pingjun/Pingjun350/ThyroidData/AnalysisROI"
-    patch_dir = "/media/pingjun/Pingjun350/ThyroidData/ThyroidS6/PatchesL2"
+    imgs_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/AnalysisROI"
+    patch_dir = "/media/pingjun/DataArchiveZizhao/Pingjun/ThyroidData/ThyroidS6/PatchesL2"
 
 
     # # generate patches

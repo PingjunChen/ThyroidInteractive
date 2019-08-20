@@ -22,8 +22,8 @@ def copy_feas(src_fea_dir, ref_fea_dir, dst_fea_dir):
 
 
 if __name__ == "__main__":
-    src_fea_dir = "../data/ThyroidS6/FeasROI/L2Feas/gist"
-    ref_fea_dir = "../data/ThyroidS1/FeasROI/L2Feas/resnet50"
-    dst_fea_dir = "../data/ThyroidS1/FeasROI/L2Feas/gist"
+    src_fea_dir = "../data/ThyroidS1/FeasROI/L2Feas/gist"
+    ref_fea_dir = "../data/ThyroidS2/FeasROI/L2Feas/resnet50"
+    dst_fea_dir = "../data/ThyroidS2/FeasROI/L2Feas/gist"
 
     copy_feas(src_fea_dir, ref_fea_dir, dst_fea_dir)
