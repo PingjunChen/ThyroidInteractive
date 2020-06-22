@@ -1,4 +1,4 @@
-Interactive Histopathology Whole Slide Image Diagnostic System using Deep Representation
+Interactive Thyroid Whole Slide Image Diagnostic System using Deep Representation
 ----------------
 
 ### Intro
