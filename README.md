@@ -31,8 +31,10 @@ Please consider cite the paper if this repository facilitates your research.
   title={Interactive Thyroid Whole Slide Image Diagnostic System using Deep Representation},
   author={Chen, Pingjun and Shi, Xiaoshuang and Liang, Yun and Li, Yuan and Yang, Lin and Gader, Paul D},
   journal={Computer Methods and Programs in Biomedicine},
+  volume={195},
   pages={105630},
   year={2020},
+  doi={https://doi.org/10.1016/j.cmpb.2020.105630},
   publisher={Elsevier}
 }
 ```
